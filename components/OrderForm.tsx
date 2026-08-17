@@ -46,7 +46,7 @@ export default function OrderForm() {
           "Опис проєкту:",
           message || "—",
         ];
-    return `mailto:azen.dev@proton.me?subject=${encodeURIComponent(
+    return `mailto:azen-dev@proton.me?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
   };

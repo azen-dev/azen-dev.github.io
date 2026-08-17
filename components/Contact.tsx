@@ -60,8 +60,8 @@ export default function Contact() {
             {t("contact.heading2")}
           </h2>
           <p>{t("contact.desc")}</p>
-          <a href="mailto:azen.dev@proton.me" className="contact-email">
-            azen.dev@proton.me
+          <a href="mailto:azen-dev@proton.me" className="contact-email">
+            azen-dev@proton.me
           </a>
           <div className="social-list">
             <a href="https://github.com/azen-dev" target="_blank" rel="noreferrer">
