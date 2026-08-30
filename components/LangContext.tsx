@@ -18,9 +18,9 @@ export const I18N: Record<string, Translation> = {
     en: "Websites, online stores, and CRM systems — built end-to-end",
   },
   "hero.cta": { uk: "Замовити проєкт →", en: "Order a project →" },
-  "hero.trust1n": { uk: "3+", en: "3+" },
+  "hero.trust1n": { uk: "8+", en: "8+" },
   "hero.trust1t": { uk: "роки на ринку", en: "years on the market" },
-  "hero.trust2n": { uk: "20+", en: "20+" },
+  "hero.trust2n": { uk: "50+", en: "50+" },
   "hero.trust2t": { uk: "реалізованих проєктів", en: "projects delivered" },
   "hero.trust3n": { uk: "100%", en: "100%" },
   "hero.trust3t": { uk: "проєктів у строк", en: "delivered on time" },
@@ -175,7 +175,7 @@ export const I18N: Record<string, Translation> = {
     uk: "Маєте ідею сайту, магазину чи CRM? Напишіть — обговоримо задачу, терміни та найкраще технічне рішення.",
     en: "Have an idea for a website, store, or CRM? Reach out — let's discuss the task, timeline, and the best approach.",
   },
-  "contact.emailBtn": { uk: "Написати мені →", en: "Email me →" },
+  "contact.emailBtn": { uk: "Написати мені на пошту →", en: "Email me →" },
 
   "testimonials.title": { uk: "Відгуки клієнтів", en: "Client Testimonials" },
   "testimonials.subtitle": {
