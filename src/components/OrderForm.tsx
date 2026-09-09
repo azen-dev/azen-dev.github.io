@@ -1,6 +1,17 @@
 import { useState, FormEvent } from 'react';
+import emailjs from '@emailjs/browser';
 import ContactButton from './ContactButton';
 import { useLang } from './LangContext';
+
+const EMAILJS_PUBLIC_KEY = import.meta.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY as
+  | string
+  | undefined;
+const EMAILJS_SERVICE_ID = import.meta.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID as
+  | string
+  | undefined;
+const EMAILJS_TEMPLATE_ID = import.meta.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID as
+  | string
+  | undefined;
 
 const TYPE_KEYS = ['form.type1', 'form.type2', 'form.type3', 'form.type4', 'form.type5'];
 const BUDGET_KEYS = [
@@ -11,7 +22,7 @@ const BUDGET_KEYS = [
   'form.budget5',
 ];
 
-type Status = 'idle' | 'sending' | 'sent';
+type Status = 'idle' | 'sending' | 'sent' | 'error';
 
 const inputClasses =
   'w-full bg-transparent border-b border-[#D7E2EA]/30 text-[#D7E2EA] placeholder:text-[#D7E2EA]/40 py-3 outline-none focus:border-[#D7E2EA] transition-colors duration-200 font-light';
@@ -25,8 +36,17 @@ export default function OrderForm() {
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState<Status>('idle');
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+      console.error(
+        'EmailJS не налаштований: перевірте env-змінні NEXT_PUBLIC_EMAILJS_SERVICE_ID, NEXT_PUBLIC_EMAILJS_TEMPLATE_ID, NEXT_PUBLIC_EMAILJS_PUBLIC_KEY.'
+      );
+      setStatus('error');
+      return;
+    }
+
     setStatus('sending');
 
     const isEn = lang === 'en';
@@ -42,30 +62,25 @@ export default function OrderForm() {
       ? `Project request from ${name || 'a client'}`
       : `Заявка на проєкт від ${name || 'клієнта'}`;
 
-    const bodyLines = isEn
-      ? [
-          `Name: ${name}`,
-          `Contact: ${contact}`,
-          `Project type: ${typeText}`,
-          `Budget: ${budgetText}`,
-          '',
-          'Project description:',
-          message || '—',
-        ]
-      : [
-          `Ім'я: ${name}`,
-          `Контакт: ${contact}`,
-          `Тип проєкту: ${typeText}`,
-          `Бюджет: ${budgetText}`,
-          '',
-          'Опис проєкту:',
-          message || '—',
-        ];
-
-    window.location.href = `mailto:azen-dev@proton.me?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
-    setStatus('sent');
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          subject,
+          from_name: name,
+          contact,
+          project_type: typeText,
+          budget: budgetText,
+          message: message || '—',
+        },
+        { publicKey: EMAILJS_PUBLIC_KEY }
+      );
+      setStatus('sent');
+    } catch (err) {
+      console.error('EmailJS send error:', err);
+      setStatus('error');
+    }
   };
 
   return (
@@ -190,6 +205,19 @@ export default function OrderForm() {
               ✓
             </span>
             <span className="text-sm">{t('form.successMsg')}</span>
+          </div>
+        )}
+
+        {status === 'error' && (
+          <div className="flex items-center gap-3 text-red-400">
+            <span className="w-6 h-6 rounded-full bg-red-400/10 flex items-center justify-center text-sm">
+              !
+            </span>
+            <span className="text-sm">
+              {lang === 'en'
+                ? 'Something went wrong. Please try again or email us directly.'
+                : 'Щось пішло не так. Спробуйте ще раз або напишіть нам напряму.'}
+            </span>
           </div>
         )}
       </form>

@@ -71,21 +71,29 @@ export default function HeroSection() {
       </div>
 
       {/* Hero Portrait */}
-      <Magnet
-        padding={150}
-        strength={3}
-        activeTransition="transform 0.3s ease-out"
-        inactiveTransition="transform 0.6s ease-in-out"
-        className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0 z-10 w-[280px] sm:w-[360px] md:w-[440px] lg:w-[520px]"
-      >
-        <FadeIn delay={0.6} y={30}>
-          <img
-            src={PORTRAIT_URL}
-            alt="Azen.dev"
-            className="w-full h-auto"
-          />
-        </FadeIn>
-      </Magnet>
+      {/* On mobile the portrait sits in normal flex flow and fills the
+          leftover vertical space between the heading and the trust stats,
+          so it lands centered in that space instead of overlapping content.
+          From sm and up, this wrapper collapses (display: contents) and the
+          image goes back to being absolutely positioned against the bottom
+          of the section, matching the original desktop layout exactly. */}
+      <div className="w-full flex-1 flex items-center justify-center sm:contents">
+        <Magnet
+          padding={150}
+          strength={3}
+          activeTransition="transform 0.3s ease-out"
+          inactiveTransition="transform 0.6s ease-in-out"
+          className="z-10 w-[260px] sm:absolute sm:left-1/2 sm:-translate-x-1/2 sm:bottom-0 sm:w-[360px] md:w-[440px] lg:w-[520px]"
+        >
+          <FadeIn delay={0.6} y={30}>
+            <img
+              src={PORTRAIT_URL}
+              alt="Azen.dev"
+              className="w-full h-auto"
+            />
+          </FadeIn>
+        </Magnet>
+      </div>
 
       {/* Trust stats */}
       <div className="relative z-20 px-6 md:px-10 pt-4 sm:pt-6 pb-6 sm:pb-8">
