@@ -1,127 +1,96 @@
 "use client";
 
-import { useEffect, useRef, type MouseEvent } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import Image from "next/image";
 import { useLang } from "./LangContext";
+import { TELEGRAM_URL } from "./config";
 
-function CubeFaces() {
-  return (
-    <>
-      <div className="face front" />
-      <div className="face back" />
-      <div className="face right" />
-      <div className="face left" />
-      <div className="face top" />
-      <div className="face bottom" />
-    </>
-  );
-}
+const SHOTS = [
+  { id: "teg", title: "TEG", host: "teg.kiev.ua", src: "/projects/teg.webp" },
+  { id: "estetdruk", title: "eSTetdruk", host: "estetdruk.shop", src: "/projects/estetdruk.webp" },
+  { id: "forma", title: "FORMA", host: "next-shop-ih5f.vercel.app", src: "/projects/forma.webp" },
+];
 
 export default function Hero() {
-  const sceneRef = useRef<HTMLDivElement>(null);
   const { t } = useLang();
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    const scene = sceneRef.current;
-    if (!scene) return;
-    const onMove = (e: globalThis.MouseEvent) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 32;
-      const y = (e.clientY / window.innerHeight - 0.5) * 18;
-      scene.style.transform = `rotate(${x * 0.18}deg) translate(${x * 0.5}px, ${y * 0.35}px) scale(1.02)`;
-    };
-    const onLeave = () => {
-      scene.style.transform = "rotate(0deg) translate(0,0) scale(1)";
-    };
-    document.addEventListener("mousemove", onMove);
-    document.addEventListener("mouseleave", onLeave);
-    return () => {
-      document.removeEventListener("mousemove", onMove);
-      document.removeEventListener("mouseleave", onLeave);
-    };
-  }, []);
-
-  const scrollToExpertise = () => {
-    document.getElementById("expertise")?.scrollIntoView({ behavior: "smooth" });
-  };
+    if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(() => setActive((a) => (a + 1) % SHOTS.length), 4500);
+    return () => clearInterval(id);
+  }, [paused]);
 
   const scrollToOrderForm = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const formEl = document.getElementById("orderForm");
-    if (formEl) {
-      formEl.scrollIntoView({ behavior: "smooth", block: "center" });
-      setTimeout(() => document.getElementById("f-name")?.focus(), 550);
-    }
+    document.getElementById("orderForm")?.scrollIntoView({ behavior: "smooth", block: "center" });
+    setTimeout(() => document.getElementById("f-name")?.focus(), 550);
   };
 
   return (
     <section id="home">
-      <div className="container hero-inner">
-        <div className="scene-entrance">
-          <div className="scene" ref={sceneRef}>
-            <div className="scene-glow" />
-            <div className="particle p1" />
-            <div className="particle p2" />
-            <div className="particle p3" />
-            <div className="particle p4" />
-            <div className="particle p5" />
-            <div className="cube-wrap a">
-              <div className="cube3d cube-a">
-                <CubeFaces />
-              </div>
+      <div className="container hx">
+        <div className="hx-copy">
+          <h1 className="hx-title display">{t("hero.title")}</h1>
+          <p className="hx-sub">{t("hero.subtitle")}</p>
+          <div className="hx-cta">
+            <a href="#contact" className="btn btn-primary btn-lg" onClick={scrollToOrderForm}>
+              {t("hero.cta")}
+            </a>
+            <a href={TELEGRAM_URL} target="_blank" rel="noreferrer" className="btn btn-ghost btn-lg">
+              {t("hero.tg")}
+            </a>
+          </div>
+          <ul className="hx-facts">
+            {(["1", "2", "3"] as const).map((n) => (
+              <li key={n}>
+                <strong>{t(`hero.trust${n}n`)}</strong>
+                <span>{t(`hero.trust${n}t`)}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div
+          className="hx-shots"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          <div className="hx-browser">
+            <div className="hx-bar">
+              <i /><i /><i />
+              <span className="hx-url mono">{SHOTS[active].host}</span>
             </div>
-            <div className="cube-wrap b">
-              <div className="cube3d cube-b">
-                <CubeFaces />
-              </div>
+            <div className="hx-screen">
+              {SHOTS.map((s, i) => (
+                <Image
+                  key={s.id}
+                  className={i === active ? "is-on" : ""}
+                  src={s.src}
+                  alt={i === active ? s.title : ""}
+                  width={1200}
+                  height={623}
+                  priority={i === 0}
+                  sizes="(max-width: 900px) 100vw, 560px"
+                />
+              ))}
             </div>
-            <div className="scene-shadow" />
+          </div>
+          <div className="hx-tabs" role="group" aria-label="Projects">
+            {SHOTS.map((s, i) => (
+              <button
+                key={s.id}
+                type="button"
+                className={i === active ? "on" : ""}
+                aria-pressed={i === active}
+                onClick={() => setActive(i)}
+              >
+                {s.title}
+              </button>
+            ))}
           </div>
         </div>
-
-        <div className="hero-title-wrap">
-          <h1 className="hero-title display">
-            <span className="letter-a-wrap">
-              A
-              <Image
-                className="a-swoosh"
-                src="/azen-swoosh.png"
-                alt=""
-                width={799}
-                height={205}
-                priority
-              />
-            </span>
-            zen<span className="brand-dot">.</span>dev
-          </h1>
-        </div>
-        <p className="hero-sub">{t("hero.subtitle")}</p>
-
-        <div className="hero-cta">
-          <a href="#contact" className="btn btn-primary btn-lg" onClick={scrollToOrderForm}>
-            {t("hero.cta")}
-          </a>
-        </div>
-
-        <div className="hero-trust">
-          <div className="hero-trust-item">
-            <strong>{t("hero.trust1n")}</strong>
-            <span>{t("hero.trust1t")}</span>
-          </div>
-          <div className="hero-trust-sep" />
-          <div className="hero-trust-item">
-            <strong>{t("hero.trust2n")}</strong>
-            <span>{t("hero.trust2t")}</span>
-          </div>
-          <div className="hero-trust-sep" />
-          <div className="hero-trust-item">
-            <strong>{t("hero.trust3n")}</strong>
-            <span>{t("hero.trust3t")}</span>
-          </div>
-        </div>
-
-        <button type="button" className="scroll-arrow" onClick={scrollToExpertise} aria-label="Scroll to next section">
-          ↓
-        </button>
       </div>
     </section>
   );

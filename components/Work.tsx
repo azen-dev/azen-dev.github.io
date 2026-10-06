@@ -14,6 +14,10 @@ interface Project {
   year: string;
   descEn: string;
   descUk: string;
+  taskEn: string;
+  taskUk: string;
+  doneEn: string;
+  doneUk: string;
   accent: string;
   live: string;
   image: string;
@@ -32,6 +36,10 @@ const PROJECTS: Project[] = [
       "Corporate website for an industrial equipment and automation company, serving the food, pharma, and logistics sectors. Bilingual, fast, and built for search visibility.",
     descUk:
       "Корпоративний сайт компанії промислового обладнання та автоматизації для харчової, фармацевтичної й логістичної галузей. Багатомовний, швидкий і оптимізований під пошук.",
+    taskEn: "Present the company across three industries and bring in B2B requests from search.",
+    taskUk: "Представити компанію в трьох галузях і залучати B2B-запити з пошуку.",
+    doneEn: "Bilingual site with a structure built around search queries and fast loading.",
+    doneUk: "Двомовний сайт зі структурою під пошукові запити та швидким завантаженням.",
     accent: "#F4A93E",
     live: "https://teg.kiev.ua/",
     image: "/projects/teg.webp",
@@ -48,6 +56,10 @@ const PROJECTS: Project[] = [
       "Online store for a textile printing and embroidery studio, with a full catalog, wholesale pricing tiers, promotions, and a smooth checkout flow.",
     descUk:
       "Інтернет-магазин студії друку на текстилі та вишивки — повний каталог, оптові ціни, акції та зручне оформлення замовлення.",
+    taskEn: "Move retail and wholesale orders of a print studio online.",
+    taskUk: "Перенести роздрібні й оптові замовлення студії друку в онлайн.",
+    doneEn: "Full catalog, wholesale price tiers, promotions and a short checkout.",
+    doneUk: "Повний каталог, оптові рівні цін, акції та короткий checkout.",
     accent: "#FB923C",
     live: "https://estetdruk.shop/",
     image: "/projects/estetdruk.webp",
@@ -55,8 +67,8 @@ const PROJECTS: Project[] = [
   {
     id: "forma",
     title: "FORMA",
-    subEn: "Luxury E-commerce Platform",
-    subUk: "Люкс E-commerce платформа",
+    subEn: "Concept: Luxury E-commerce Platform",
+    subUk: "Концепт люкс E-commerce платформи",
     tagEn: "E-commerce",
     tagUk: "E-commerce",
     year: "2024",
@@ -64,6 +76,10 @@ const PROJECTS: Project[] = [
       "Concept storefront for premium lifestyle goods, built with a custom design system and a more editorial, restrained visual style than a typical shop template.",
     descUk:
       "Концептуальний магазин преміальних товарів для дому — власна дизайн-система і більш редакційний, стриманий візуальний стиль, ніж у типового шаблону магазину.",
+    taskEn: "Show how a premium store can look beyond a standard template.",
+    taskUk: "Показати, як може виглядати преміальний магазин поза типовим шаблоном.",
+    doneEn: "Custom design system and an editorial, restrained storefront.",
+    doneUk: "Власна дизайн-система та стриманий, редакційний вітринний дизайн.",
     accent: "#6EE7B7",
     live: "https://next-shop-ih5f.vercel.app/",
     image: "/projects/forma.webp",
@@ -121,6 +137,12 @@ export default function Work() {
                 <h3 className="project-title">{p.title}</h3>
                 <p className="project-sub">{isEn ? p.subEn : p.subUk}</p>
                 <p className="project-desc">{isEn ? p.descEn : p.descUk}</p>
+                <dl className="project-case">
+                  <dt>{isEn ? "Task" : "Задача"}</dt>
+                  <dd>{isEn ? p.taskEn : p.taskUk}</dd>
+                  <dt>{isEn ? "Solution" : "Рішення"}</dt>
+                  <dd>{isEn ? p.doneEn : p.doneUk}</dd>
+                </dl>
                 <div className="project-actions">
                   <a href={p.live} target="_blank" rel="noreferrer" className="project-link">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">

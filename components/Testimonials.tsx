@@ -1,46 +1,55 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { useLang } from "./LangContext";
 
 interface Quote {
-  cls: string;
   name: string;
-  labelEn: string;
-  labelUk: string;
+  project: string;
+  url: string;
+  accent: string;
+  roleEn: string;
+  roleUk: string;
   textEn: string;
   textUk: string;
 }
 
 const QUOTES: Quote[] = [
   {
-    cls: "blue",
     name: "Сергій",
-    labelEn: "TEG · Industrial automation",
-    labelUk: "TEG · Промислова автоматизація",
-    textEn:
-      "Thanks to Azen.dev for the website — delivered exactly to spec, with attention to detail and no delays.",
+    project: "TEG",
+    url: "https://teg.kiev.ua/",
+    accent: "#F4A93E",
+    roleEn: "Industrial automation",
+    roleUk: "Промислова автоматизація",
+   textEn:
+      "Azen.dev did a great job with our website. Everything was delivered on time, exactly according to our requirements, with attention to every detail.",
     textUk:
-      "Дякую Azen.dev за розробку сайту — точно за технічним завданням, з увагою до деталей і без затримок по строках.",
+      "Azen.dev чудово впоралися з розробкою нашого сайту. Все виконали вчасно, відповідно до наших вимог і з увагою до кожної деталі.",
   },
   {
-    cls: "deep",
     name: "Михайло",
-    labelEn: "eSTetdruk · Print & merch store",
-    labelUk: "eSTetdruk · Друк та мерч",
-    textEn:
-      "Thanks to Azen.dev for the online store — the catalog, cart, and wholesale pricing turned out exactly as planned.",
+    project: "eSTetdruk",
+    url: "https://estetdruk.shop/",
+    accent: "#FB923C",
+    roleEn: "Print & merch store",
+    roleUk: "Друк та мерч",
+   textEn:
+      "We are very happy with our online store. The catalog, shopping cart, and wholesale pricing work exactly as we expected.",
     textUk:
-      "Дякую Azen.dev за розробку інтернет-магазину — каталог, кошик і оптові ціни запрацювали саме так, як і планували.",
+      "Ми дуже задоволені нашим інтернет-магазином. Каталог, кошик та оптові ціни працюють саме так, як ми очікували.",
   },
   {
-    cls: "light",
     name: "Артем",
-    labelEn: "FORMA · E-commerce platform",
-    labelUk: "FORMA · E-commerce платформа",
-    textEn:
-      "Thanks to Azen.dev for the e-commerce platform — clean code, a thoughtful UI, and stable performance after launch.",
+    project: "FORMA",
+    url: "https://next-shop-ih5f.vercel.app/",
+    accent: "#6EE7B7",
+    roleEn: "E-commerce platform",
+    roleUk: "E-commerce платформа",
+   textEn:
+      "The result exceeded our expectations. The platform has a clean interface, thoughtful design, and works reliably after launch.",
     textUk:
-      "Дякую Azen.dev за розробку e-commerce платформи — чистий код, продуманий UI і стабільна робота після запуску.",
+      "Результат перевершив наші очікування. Платформа має чистий інтерфейс, продуманий дизайн і стабільно працює після запуску.",
   },
 ];
 
@@ -55,14 +64,16 @@ export default function Testimonials() {
         <p className="section-sub reveal">{t("testimonials.subtitle")}</p>
         <div className="quotes-grid reveal-stagger">
           {QUOTES.map((q) => (
-            <div className={`qcard ${q.cls}`} key={q.name}>
-              <div className="qmark">&quot;</div>
-              <p>{isEn ? q.textEn : q.textUk}</p>
-              <div>
-                <h5>{q.name}</h5>
-                <span>{isEn ? q.labelEn : q.labelUk}</span>
-              </div>
-            </div>
+            <figure className="qcard" key={q.name} style={{ "--q-accent": q.accent } as CSSProperties}>
+              <blockquote>{isEn ? q.textEn : q.textUk}</blockquote>
+              <figcaption>
+                <strong>{q.name}</strong>
+                <span>{isEn ? q.roleEn : q.roleUk}</span>
+                <a href={q.url} target="_blank" rel="noreferrer">
+                  {q.project} ↗
+                </a>
+              </figcaption>
+            </figure>
           ))}
         </div>
       </div>

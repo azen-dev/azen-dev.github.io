@@ -7,29 +7,11 @@ export type Lang = "uk" | "en";
 type Translation = { uk: string; en: string };
 
 export const I18N: Record<string, Translation> = {
-  "nav.home": { uk: "// головна", en: "// home" },
-  "nav.services": { uk: "// послуги", en: "// services" },
   "nav.why": { uk: "// переваги", en: "// why me" },
-  "nav.work": { uk: "// проєкти", en: "// work" },
-  "nav.order": { uk: "// замовити", en: "// order" },
 
-  "hero.subtitle": {
-    uk: "Розробка сайтів, інтернет-магазинів та CRM під ключ",
-    en: "Websites, online stores, and CRM systems — built end-to-end",
-  },
   "hero.cta": { uk: "Замовити проєкт →", en: "Order a project →" },
-  "hero.trust1n": { uk: "8+", en: "8+" },
-  "hero.trust1t": { uk: "роки на ринку", en: "years on the market" },
-  "hero.trust2n": { uk: "50+", en: "50+" },
-  "hero.trust2t": { uk: "реалізованих проєктів", en: "projects delivered" },
-  "hero.trust3n": { uk: "100%", en: "100%" },
-  "hero.trust3t": { uk: "проєктів у строк", en: "delivered on time" },
 
   "expertise.title": { uk: "Що я роблю", en: "What I Do" },
-  "expertise.subtitle": {
-    uk: "Три напрямки, які закривають більшість digital-задач бізнесу.",
-    en: "Three service areas that cover most digital needs of a business.",
-  },
   "expertise.card1.title1": { uk: "Веб-розробка", en: "Web Development" },
   "expertise.card1.title2": { uk: "сайти та лендінги", en: "websites & landing pages" },
   "expertise.card1.line1": {
@@ -49,16 +31,6 @@ export const I18N: Record<string, Translation> = {
   "expertise.card2.line2": {
     uk: "продажів, замовлень і клієнтської бази.",
     en: "orders, and your customer base.",
-  },
-  "expertise.card3.title1": { uk: "Мобільні", en: "Mobile" },
-  "expertise.card3.title2": { uk: "додатки iOS/Android", en: "iOS/Android apps" },
-  "expertise.card3.line1": {
-    uk: "Кросплатформні застосунки з єдиною кодовою",
-    en: "Cross-platform apps built from a single codebase,",
-  },
-  "expertise.card3.line2": {
-    uk: "базою та нативною швидкодією.",
-    en: "with native-grade performance.",
   },
 
   "why.eyebrow": { uk: "Мій підхід", en: "My Approach" },
@@ -183,10 +155,27 @@ export const I18N: Record<string, Translation> = {
     en: "What clients say after working with me.",
   },
 
-  "footer.text": {
-    uk: "© 2026 Azen.dev — Сайти • Інтернет-магазини • CRM • Мобільні додатки",
-    en: "© 2026 Azen.dev — Websites • E-commerce • CRM • Mobile Apps",
-  },
+  "nav.home": { uk: "Головна", en: "Home" },
+  "nav.services": { uk: "Послуги", en: "Services" },
+  "nav.work": { uk: "Проєкти", en: "Work" },
+  "nav.order": { uk: "Замовити", en: "Order" },
+  "nav.pricing": { uk: "Вартість", en: "Pricing" },
+  "nav.about": { uk: "Про мене", en: "About" },
+  "hero.tg": { uk: "Написати в Telegram", en: "Message on Telegram" },
+  "hero.trust1n": { uk: "від 7 днів", en: "from 7 days" },
+  "hero.trust1t": { uk: "на лендінг", en: "for a landing page" },
+  "hero.trust2n": { uk: "3 галузі", en: "3 industries" },
+  "hero.trust2t": { uk: "промисловість, друк, e-commerce", en: "industrial, print, e-commerce" },
+  "hero.trust3n": { uk: "1:1", en: "1:1" },
+  "hero.trust3t": { uk: "спілкуєтесь напряму зі мною", en: "you talk directly to me" },
+  "expertise.subtitle": { uk: "Два основні напрямки та супровід після запуску.", en: "Two core services plus support after launch." },
+  "expertise.card3.title1": { uk: "Підтримка", en: "Support" },
+  "expertise.card3.title2": { uk: "та доопрацювання", en: "& improvements" },
+  "expertise.card3.line1": { uk: "Оновлення, нові функції та виправлення", en: "Updates, new features and fixes" },
+  "expertise.card3.line2": { uk: "після запуску — без пошуку нового підрядника.", en: "after launch, no need to find a new contractor." },
+  "footer.text": { uk: "© 2026 Azen.dev — Сайти • Інтернет-магазини • CRM", en: "© 2026 Azen.dev — Websites • E-commerce • CRM" },
+  "hero.title": { uk: "Сайти та інтернет-магазини, які працюють на ваш бізнес", en: "Websites and online stores that work for your business" },
+  "hero.subtitle": { uk: "Від ідеї до запуску й підтримки. Один виконавець, без посередників.", en: "From idea to launch and support. One developer, no middlemen." },
 };
 
 interface LangContextValue {

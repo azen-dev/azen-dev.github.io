@@ -25,13 +25,13 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://azen-dev.github.io"),
-  title: "Azen — Web Developer",
+  title: "Azen — розробка сайтів та інтернет-магазинів під ключ",
   description:
-    "Розробка сайтів, інтернет-магазинів, CRM та мобільних додатків. 5+ років досвіду.",
+    "Сайти та інтернет-магазини для бізнесу: від ідеї до запуску. Фіксована вартість, прямий зв'язок з розробником.",
   openGraph: {
-    title: "Azen — Web Developer",
+    title: "Azen — розробка сайтів та інтернет-магазинів під ключ",
     description:
-      "Розробка сайтів, інтернет-магазинів, CRM та мобільних додатків. 5+ років досвіду.",
+      "Сайти та інтернет-магазини для бізнесу: від ідеї до запуску. Фіксована вартість, прямий зв'язок з розробником.",
     url: "https://azen-dev.github.io",
     siteName: "Azen.dev",
     locale: "uk_UA",
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Azen — Web Developer",
+    title: "Azen — розробка сайтів та інтернет-магазинів під ключ",
     description:
-      "Розробка сайтів, інтернет-магазинів, CRM та мобільних додатків. 5+ років досвіду.",
+      "Сайти та інтернет-магазини для бізнесу: від ідеї до запуску. Фіксована вартість, прямий зв'язок з розробником.",
   },
 };
 

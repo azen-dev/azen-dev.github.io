@@ -3,6 +3,7 @@
 import { useCallback, useRef } from "react";
 import OrderForm from "./OrderForm";
 import { useLang } from "./LangContext";
+import { TELEGRAM_URL, EMAIL } from "./config";
 
 export default function Contact() {
   const { t } = useLang();
@@ -76,7 +77,7 @@ export default function Contact() {
           </div>
           <div className="cta-band-actions reveal">
             <a
-              href="mailto:azen-dev@proton.me"
+              href={`mailto:${EMAIL}`}
               className="btn-magnetic"
               ref={btnRef}
               onMouseMove={handleBtnMove}
@@ -87,6 +88,9 @@ export default function Contact() {
               </span>
             </a>
             <div className="cta-band-links">
+              <a href={TELEGRAM_URL} target="_blank" rel="noreferrer">
+                Telegram
+              </a>
               <a href="https://www.instagram.com/azen.dev" target="_blank" rel="noreferrer">
                 Instagram
               </a>
